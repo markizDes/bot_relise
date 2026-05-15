@@ -100,8 +100,8 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
     if user.id in [8293418325]:
         print(message)
-        if message is None or not message.text:
-            return
+        # if message is None or not message.text:
+        #     return
 
         await message.reply_text(f"Отправил:\n{message.text}")
         # Данные для запроса
@@ -128,10 +128,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m += "-------------\n" + j
             print(book)
             await message.reply_text(f"Результат:\n{m}")
-        return
+        return 0
     else:
         await message.reply_text(f"Айди не одобрен:\n{user.id}")
-        return
+
+        return 0
 
 
 
