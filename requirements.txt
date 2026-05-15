@@ -1,2 +1,6 @@
 python-telegram-bot==22.7
 python-dotenv>=1.0,<2.0
+beautifulsoup4==4.14.3
+requests==2.34.1
+html5lib
+selenium
