@@ -15,7 +15,7 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
-        bot_token = BOT_API_TOKEN
+        bot_token = BOT_TOKEN
 
 
         log_level = os.getenv("LOG_LEVEL", "INFO").strip().upper() or "INFO"
