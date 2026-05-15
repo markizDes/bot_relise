@@ -128,11 +128,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m += "-------------\n" + j
             print(book)
             await message.reply_text(f"Результат:\n{m}")
-        return 0
+        return
     else:
         await message.reply_text(f"Айди не одобрен:\n{user.id}")
 
-        return 0
+        return 
 
 
 
