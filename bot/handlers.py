@@ -96,9 +96,9 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    message = update.effective_message
+    message = update.effective_message3
     user = update.effective_user
-    if user.id in [8293418325]:
+    if user.id in [8293418325,7751534678]:
         print(message)
         if message is None or not message.text:
             return
