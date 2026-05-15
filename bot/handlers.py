@@ -96,7 +96,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
-    message = update.effective_message3
+    message = update.effective_message
     user = update.effective_user
     if user.id in [8293418325]:
         print(message)
@@ -108,30 +108,32 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         request_data = {
             'search_field': message.text
         }
+        # Отправляем форму
+        # form = driver.find_element(By.CLASS_NAME, 'main__search-form')
+        # input_field = form.find_element(By.TAG_NAME, 'input')
+        # input_field.send_keys(message.text)
+        # # Отправляем форму
+        # form.submit()
+        soup = BeautifulSoup(s.get(mirea_url + message.text).text, 'html.parser')
+
+        # response = s.post(form.get('action'), { 'search_field': message.text})
+        # print(soup)
+        for i in soup.find_all(class_="bib-desc"):
+            m = ""
+            print(i.text)
+            book = [j for j in BeautifulSoup(i.text, 'html5lib')]
+            for j in book:
+                j = j.text
+                [j := j.replace(st, " ") for st in [".—", "/", ": "]]
+                m += "-------------\n" + j
+            print(book)
+            await message.reply_text(f"Результат:\n{m}")
+        return
     else:
-        print(message)
-        await message.reply_text(f"Ваш айди не одобрен:\n{user.id}")
+        await message.reply_text(f"Айди не одобрен:\n{user.id}")
+        return
 
-    # Отправляем форму
-    # form = driver.find_element(By.CLASS_NAME, 'main__search-form')
-    # input_field = form.find_element(By.TAG_NAME, 'input')
-    # input_field.send_keys(message.text)
-    # # Отправляем форму
-    # form.submit()
-    soup = BeautifulSoup(s.get(mirea_url+message.text).text, 'html.parser')
 
-    # response = s.post(form.get('action'), { 'search_field': message.text})
-    # print(soup)
-    for i in soup.find_all(class_="bib-desc"):
-        m = ""
-        print(i.text)
-        book = [j for j in BeautifulSoup(i.text, 'html5lib')]
-        for j in book:
-            j = j.text
-            [j := j.replace(st," ") for st in [".—","/",": "]]
-            m+="-------------\n"+j
-        print(book)
-        await message.reply_text(f"Результат:\n{m}")
 
 
 async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
