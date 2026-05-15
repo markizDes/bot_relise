@@ -97,15 +97,17 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     del context
     message = update.effective_message
-    print(message)
-    if message is None or not message.text:
-        return
+    user = update.effective_user
+    if user.id in [8293418325]:
+        print(message)
+        if message is None or not message.text:
+            return
 
-    await message.reply_text(f"Отправил:\n{message.text}")
-    # Данные для запроса
-    request_data = {
-        'search_field': message.text
-    }
+        await message.reply_text(f"Отправил:\n{message.text}")
+        # Данные для запроса
+        request_data = {
+            'search_field': message.text
+        }
 
     # Отправляем форму
     # form = driver.find_element(By.CLASS_NAME, 'main__search-form')
