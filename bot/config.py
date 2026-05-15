@@ -5,7 +5,6 @@ import os
 
 from dotenv import load_dotenv
 
-BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 load_dotenv()
 
@@ -16,7 +15,7 @@ class Settings:
 
     @classmethod
     def from_env(cls) -> "Settings":
-        bot_token = BOT_TOKEN
+        bot_token = os.getenv('BOT_TOKEN')
 
 
         log_level = os.getenv("LOG_LEVEL", "INFO").strip().upper() or "INFO"
