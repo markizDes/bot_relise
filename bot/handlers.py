@@ -108,6 +108,9 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         request_data = {
             'search_field': message.text
         }
+    else:
+        print(message)
+        await message.reply_text(f"Ваш айди не одобрен:\n{user.id}")
 
     # Отправляем форму
     # form = driver.find_element(By.CLASS_NAME, 'main__search-form')
