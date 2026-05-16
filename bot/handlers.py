@@ -107,8 +107,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     bibl_request = message.text
 
 
-def req(pol,text):
-    requests.post(WEB_APP_URL, data=json.dumps({'range': pol,'value': text}))
+
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -147,7 +146,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
                 q = j.split(" ")
                 for k in range(len(q)):
-                    req("ABCDEFG"[k]+str(i),q[k])
+                    requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFG"[k]+str(i),'value': q[k]}))
                     l+=1
                 m += "-------------\n" + j
             print(book)
