@@ -135,9 +135,10 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         # response = s.post(form.get('action'), { 'search_field': message.text})
         # print(soup)
-        for i in soup.find_all(class_="bib-desc"):
+        for i in range(len(mi:=soup.find_all(class_="bib-desc"))):
             m = ""
             o = i
+            i = mi[i]
             print(i.text)
             book = [j for j in BeautifulSoup(i.text, 'html5lib')]
             for j in range(len(book)):
@@ -146,7 +147,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m += "-------------\n" + j
                 # for k in range(len(q)):
                 #     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
-                requests.post(WEB_APP_URL, data=json.dumps({'range': "A"+str(o),'value': j}))
+            requests.post(WEB_APP_URL, data=json.dumps({'range': "A"+str(o),'value': m}))
 
             # print(book)
             await message.reply_text(f"Результат:\n{m}")
