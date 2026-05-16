@@ -4,3 +4,7 @@ beautifulsoup4==4.14.3
 requests==2.34.1
 html5lib
 selenium
+google
+google_auth_oauthlib
+google-api-python-client
+gspread

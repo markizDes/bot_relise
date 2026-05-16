@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 import html5lib
-
+import gspread
 logger = logging.getLogger(__name__)
 
 #Настройка парсинга сайта
@@ -18,8 +18,23 @@ s = requests.Session()
 mirea_url = 'https://ibc.mirea.ru/books/search/?search_field='
 s.headers.update({'Referer': mirea_url})
 # csrf = form.find('input', {'name': 'csrfmiddlewaretoken'}).get('value')
-
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 #Настройка парсинга сайта
+
+
+#Настройка подключения к API
+# Если вы изменяете эти области доступа (SCOPES), удалите файл token.json
+SCOPES = ['https://docs.google.com/spreadsheets/d/1tBoktUQPkdC4zwQdsyE3MGR5Kcf74MIl2M7rz2T4mEc/edit?gid=0#gid=0']
+
+# ID вашей таблицы (можно найти в URL: https://docs.google.com/spreadsheets/d/ID_ТАБЛИЦЫ/edit)
+SPREADSHEET_ID = '1tBoktUQPkdC4zwQdsyE3MGR5Kcf74MIl2M7rz2T4mEc'
+RANGE_NAME = 'Class Data!A2:E' # "Название листа!диапазон"
+#Настройка подключения к API
+
+
 
 BOT_COMMANDS = (
     ("start", "Show the main menu"),
