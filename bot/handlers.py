@@ -141,14 +141,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             print(i.text)
             book = [j for j in BeautifulSoup(i.text, 'html5lib')]
             for j in range(len(book)):
-                l = 1
                 j = book[j].text
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
                 q = j.split(" ")
                 m += "-------------\n" + j
                 for k in range(len(q)):
                     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
-                    l+=1
 
             print(book)
             await message.reply_text(f"Результат:\n{m}")
