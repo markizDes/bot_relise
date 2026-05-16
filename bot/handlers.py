@@ -141,12 +141,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             book = [j for j in BeautifulSoup(i.text, 'html5lib')]
             for j in range(len(book)):
                 l = 1
-                i = j
+                o = j
                 j = book[j].text
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
                 q = j.split(" ")
                 for k in range(len(q)):
-                    requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(i),'value': q[k]}))
+                    requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
                     l+=1
                 m += "-------------\n" + j
             print(book)
