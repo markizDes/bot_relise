@@ -146,7 +146,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
                 q = j.split(" ")
                 for k in range(len(q)):
-                    requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFG"[k]+str(i),'value': q[k]}))
+                    requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k]+str(i),'value': q[k]}))
                     l+=1
                 m += "-------------\n" + j
             print(book)
