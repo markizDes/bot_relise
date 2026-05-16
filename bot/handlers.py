@@ -3,12 +3,14 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 import time
+import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from telegram import ReplyKeyboardMarkup, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 import html5lib
 import gspread
+import os
 logger = logging.getLogger(__name__)
 
 #Настройка парсинга сайта
@@ -27,8 +29,8 @@ from googleapiclient.discovery import build
 
 #Настройка подключения к API
 # Если вы изменяете эти области доступа (SCOPES), удалите файл token.json
-SCOPES = ['https://docs.google.com/spreadsheets/d/1tBoktUQPkdC4zwQdsyE3MGR5Kcf74MIl2M7rz2T4mEc/edit?gid=0#gid=0']
-
+CREDENTIALS_FILE = 'path/to/your/credentials.json'
+WEB_APP_URL =os.getenv('WEB_APP_URL')
 # ID вашей таблицы (можно найти в URL: https://docs.google.com/spreadsheets/d/ID_ТАБЛИЦЫ/edit)
 SPREADSHEET_ID = '1tBoktUQPkdC4zwQdsyE3MGR5Kcf74MIl2M7rz2T4mEc'
 RANGE_NAME = 'Class Data!A2:E' # "Название листа!диапазон"
@@ -117,7 +119,8 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         print(message)
         # if message is None or not message.text:
         #     return
-
+        creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
+        client = gspread.authorize(creds)
         await message.reply_text(f"Отправил:\n{message.text}")
         # Данные для запроса
         request_data = {
@@ -143,6 +146,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 m += "-------------\n" + j
             print(book)
             await message.reply_text(f"Результат:\n{m}")
+
+        payload = {
+                'range': 'A1',  # Ячейка для изменения
+                'value': message.text  # Новое значение
+        }
+        requests.post(WEB_APP_URL, data=json.dumps(payload))
 
     else:
         await message.reply_text(f"Айди не одобрен:\n{user.id}")
