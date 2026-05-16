@@ -107,8 +107,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #     bibl_request = message.text
 
 
-
-
+def req(pol,text):
+    requests.post(WEB_APP_URL, data=json.dumps({'range': pol,'value': text}))
 
 
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -140,18 +140,20 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m = ""
             print(i.text)
             book = [j for j in BeautifulSoup(i.text, 'html5lib')]
-            for j in book:
-                j = j.text
+            for j in range(book):
+                l = 1
+                i = j
+                j = book[j].text
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
+                q = j.split(" ")
+                for k in range(len(q)):
+                    req("ABCDEFG"[k]+str(i),q[k])
+                    l+=1
                 m += "-------------\n" + j
             print(book)
             await message.reply_text(f"Результат:\n{m}")
 
-        payload = {
-                'range': 'A1',  # Ячейка для изменения
-                'value': message.text  # Новое значение
-        }
-        requests.post(WEB_APP_URL, data=json.dumps(payload))
+
 
     else:
         await message.reply_text(f"Айди не одобрен:\n{user.id}")
