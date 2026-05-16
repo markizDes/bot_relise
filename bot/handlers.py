@@ -139,7 +139,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             m = ""
             print(i.text)
             book = [j for j in BeautifulSoup(i.text, 'html5lib')]
-            for j in range(book):
+            for j in range(len(book)):
                 l = 1
                 i = j
                 j = book[j].text
