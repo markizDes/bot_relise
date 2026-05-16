@@ -119,8 +119,8 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         print(message)
         # if message is None or not message.text:
         #     return
-        creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
-        client = gspread.authorize(creds)
+        # creds = Credentials.from_service_account_file(CREDENTIALS_FILE, scopes=SCOPES)
+        # client = gspread.authorize(creds)
         await message.reply_text(f"Отправил:\n{message.text}")
         # Данные для запроса
         request_data = {
