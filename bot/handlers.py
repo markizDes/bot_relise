@@ -143,11 +143,10 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             for j in range(len(book)):
                 j = book[j].text
                 [j := j.replace(st, " ") for st in [".—", "/", ": "]]
-                q = j.split(" ")
                 m += "-------------\n" + j
-                print(q)
                 # for k in range(len(q)):
                 #     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
+                requests.post(WEB_APP_URL, data=json.dumps({'range': "A"+str(o),'value': j}))
 
             # print(book)
             await message.reply_text(f"Результат:\n{m}")
