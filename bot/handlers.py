@@ -163,11 +163,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         #
         #     # print(book)
         #     await message.reply_text(f"Результат:\n{m}")
-        for i in (get_sheet_data("Лист1")['data'][2:]):
-            lis=""
-            for j in i:
-                lis+=" "+str(j)
-            await message.reply_text(lis)
+        # for i in (get_sheet_data("Лист1")['data'][2:]):
+        #     lis=""
+        #     for j in i:
+        #         lis+=" "+str(j)
+        #     await message.reply_text(lis)
+        print(get_sheet_data("Лист1"))
                 # requests.post(WEB_APP_URL, data=json.dumps({'range': "A" + str(o), 'value': m}))
 
 
