@@ -31,6 +31,7 @@ from googleapiclient.discovery import build
 # Если вы изменяете эти области доступа (SCOPES), удалите файл token.json
 CREDENTIALS_FILE = 'path/to/your/credentials.json'
 WEB_APP_URL =os.getenv('WEB_APP_URL')
+WEB_APP_URL2 =os.getenv('WEB_APP_URL2')
 # ID вашей таблицы (можно найти в URL: https://docs.google.com/spreadsheets/d/ID_ТАБЛИЦЫ/edit)
 SPREADSHEET_ID = '1tBoktUQPkdC4zwQdsyE3MGR5Kcf74MIl2M7rz2T4mEc'
 RANGE_NAME = 'Class Data!A2:E' # "Название листа!диапазон"
@@ -108,7 +109,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 def get_sheet_data(sheet_name=None):
     """Получить данные с конкретного листа"""
-    url = WEB_APP_URL
+    url = WEB_APP_URL2
 
     if sheet_name:
         url += f'?sheet={sheet_name}'
@@ -162,7 +163,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         #
         #     # print(book)
         #     await message.reply_text(f"Результат:\n{m}")
-        for i in (get_sheet_data("Лист1")['data']):
+        for i in (get_sheet_data("Лист1")['data'][2:]):
             lis=""
             for j in i:
                 lis+=" "+str(j)
