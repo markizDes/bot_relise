@@ -106,7 +106,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 #
 #     bibl_request = message.text
 
+def get_sheet_data(sheet_name=None):
+    """Получить данные с конкретного листа"""
+    url = WEB_APP_URL
 
+    if sheet_name:
+        url += f'?sheet={sheet_name}'
+
+    response = requests.get(url)
+    return response.json() if response.status_code == 200 else None
 
 
 
@@ -135,23 +143,31 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         # response = s.post(form.get('action'), { 'search_field': message.text})
         # print(soup)
-        for i in range(len(mi:=soup.find_all(class_="bib-desc"))):
-            m = ""
-            o = i
-            i = mi[i]
-            print(i.text)
-            book = [j for j in BeautifulSoup(i.text, 'html5lib')]
-            for j in range(len(book)):
-                j = book[j].text
-                [j := j.replace(st, " ") for st in [".—", "/", ": "]]
-                m += "-------------\n" + j
-                # for k in range(len(q)):
-                #     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
-            requests.post(WEB_APP_URL, data=json.dumps({'range': "A"+str(o),'value': m}))
-
-            # print(book)
-            await message.reply_text(f"Результат:\n{m}")
-
+        # for i in range(len(mi:=soup.find_all(class_="bib-desc"))):
+        #     m = ""
+        #     o = i
+        #     i = mi[i]
+        #     print(i.text)
+        #     book = [j for j in BeautifulSoup(i.text, 'html5lib')]
+        #     for j in range(len(book)):
+        #         j = book[j].text
+        #         [j := j.replace(st, " ") for st in [".—", "/", ": "]]
+        #         m += "-------------\n" + j
+        #         # for k in range(len(q)):
+        #         #     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
+        #
+        #
+        #
+        #
+        #
+        #     # print(book)
+        #     await message.reply_text(f"Результат:\n{m}")
+        for i in (get_sheet_data("Лист1")['data']):
+            lis=""
+            for j in i:
+                lis+=" "+str(j)
+            await message.reply_text(lis)
+                # requests.post(WEB_APP_URL, data=json.dumps({'range': "A" + str(o), 'value': m}))
 
 
     else:
