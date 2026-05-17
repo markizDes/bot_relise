@@ -28,7 +28,6 @@ from googleapiclient.discovery import build
 
 
 #Настройка подключения к API
-# Если вы изменяете эти области доступа (SCOPES), удалите файл token.json
 CREDENTIALS_FILE = 'path/to/your/credentials.json'
 WEB_APP_URL =os.getenv('WEB_APP_URL')
 WEB_APP_URL2 =os.getenv('WEB_APP_URL2')
@@ -131,9 +130,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         # client = gspread.authorize(creds)
         await message.reply_text(f"Отправил:\n{message.text}")
         # Данные для запроса
-        request_data = {
-            'search_field': message.text
-        }
+
         # Отправляем форму
         # form = driver.find_element(By.CLASS_NAME, 'main__search-form')
         # input_field = form.find_element(By.TAG_NAME, 'input')
@@ -144,16 +141,19 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
         # response = s.post(form.get('action'), { 'search_field': message.text})
         # print(soup)
+        for i in range(get_sheet_data("Лист1")['data'][2:]):
         # for i in range(len(mi:=soup.find_all(class_="bib-desc"))):
         #     m = ""
         #     o = i
         #     i = mi[i]
         #     print(i.text)
-        #     book = [j for j in BeautifulSoup(i.text, 'html5lib')]
-        #     for j in range(len(book)):
-        #         j = book[j].text
-        #         [j := j.replace(st, " ") for st in [".—", "/", ": "]]
-        #         m += "-------------\n" + j
+            if len(so:=BeautifulSoup(soup.text, 'html5lib'))>=1:
+                requests.post(WEB_APP_URL,data=json.dumps({'range': "K" + str(i), 'value': so[1]}))
+            # book = [j for j in BeautifulSoup(i.text, 'html5lib')]
+            # for j in range(len(book)):
+            #     j = book[j].text
+            #     [j := j.replace(st, " ") for st in [".—", "/", ": "]]
+            #     m += "-------------\n" + j
         #         # for k in range(len(q)):
         #         #     requests.post(WEB_APP_URL, data=json.dumps({'range': "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[k%26]+str(o),'value': q[k]}))
         #
@@ -163,11 +163,11 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         #
         #     # print(book)
         #     await message.reply_text(f"Результат:\n{m}")
-        for i in (get_sheet_data("Лист1")['data'][2:]):
-            lis=""
-            for j in i:
-                lis+=" "+str(j)
-            await message.reply_text(lis)
+        # for i in (get_sheet_data("Лист1")['data'][2:]):
+        #     lis=""
+        #     for j in i:
+        #         lis+=" "+str(j)
+        #     await message.reply_text(lis)
         print(get_sheet_data("Лист1"))
                 # requests.post(WEB_APP_URL, data=json.dumps({'range': "A" + str(o), 'value': m}))
 
