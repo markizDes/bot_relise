@@ -20,10 +20,6 @@ s = requests.Session()
 mirea_url = 'https://ibc.mirea.ru/books/search/?search_field='
 s.headers.update({'Referer': mirea_url})
 # csrf = form.find('input', {'name': 'csrfmiddlewaretoken'}).get('value')
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
 #Настройка парсинга сайта
 
 
