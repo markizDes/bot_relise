@@ -137,18 +137,19 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         # input_field.send_keys(message.text)
         # # Отправляем форму
         # form.submit()
-        soup = BeautifulSoup(s.get(mirea_url + message.text).text, 'html.parser')
+
 
         # response = s.post(form.get('action'), { 'search_field': message.text})
         # print(soup)
-        for i in range(get_sheet_data("Лист1")['data'][2:]):
+        for i in range(k:=get_sheet_data("Лист1")['data'][2:]):
         # for i in range(len(mi:=soup.find_all(class_="bib-desc"))):
         #     m = ""
         #     o = i
         #     i = mi[i]
         #     print(i.text)
+            soup = BeautifulSoup(s.get(mirea_url + k[i]).text, 'html.parser')
             if len(so:=BeautifulSoup(soup.text, 'html5lib'))>=1:
-                requests.post(WEB_APP_URL,data=json.dumps({'range': "K" + str(i), 'value': so[1]}))
+                requests.post(WEB_APP_URL,data=json.dumps({'range': "K" + str(i), 'value': so[0]}))
             # book = [j for j in BeautifulSoup(i.text, 'html5lib')]
             # for j in range(len(book)):
             #     j = book[j].text
@@ -166,7 +167,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         # for i in (get_sheet_data("Лист1")['data'][2:]):
         #     lis=""
         #     for j in i:
-        
+
         #         lis+=" "+str(j)
         #     await message.reply_text(lis)
         print(get_sheet_data("Лист1"))
