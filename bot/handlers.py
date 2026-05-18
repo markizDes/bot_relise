@@ -148,7 +148,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         #     i = mi[i]
         #     print(i.text)
             soup = BeautifulSoup(s.get(mirea_url + k[i]).text, 'html.parser')
-            if len(so:=BeautifulSoup(soup.text, 'html5lib'))>=1:
+            if len(so:=BeautifulSoup(soup.text, 'html5lib').find_all(class_="bib-desc"))>=1:
                 requests.post(WEB_APP_URL,data=json.dumps({'range': "K" + str(i), 'value': so[0]}))
             # book = [j for j in BeautifulSoup(i.text, 'html5lib')]
             # for j in range(len(book)):
