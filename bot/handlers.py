@@ -166,6 +166,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         # for i in (get_sheet_data("Лист1")['data'][2:]):
         #     lis=""
         #     for j in i:
+        
         #         lis+=" "+str(j)
         #     await message.reply_text(lis)
         print(get_sheet_data("Лист1"))
